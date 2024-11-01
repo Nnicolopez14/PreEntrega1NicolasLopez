@@ -27,15 +27,26 @@
     align-items: center;
 }
 
+.active-link{
+    color: black;
+    font-weight: bold;
+}
+
 .cartWidget{
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.active-link{
+.cartwidget .icon-cartwidget{
+    font-size: 30px;
     color: black;
-    font-weight: bold;
 }
-
+.cartwidget .empty-cartwidget{
+    font-size: 30px;
+    color: rgb(64, 64, 64);
+}
+.cartwidget .number-cartwidget{
+    padding: 0 10px;
+    color: black;
+}

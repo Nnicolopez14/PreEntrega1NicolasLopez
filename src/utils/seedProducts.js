@@ -1,3 +1,6 @@
+import db from "../db/db.js"
+import { addDoc, collection } from "firebase/firestore"
+
 const products = [
     {
         id:"1",
@@ -158,37 +161,19 @@ const products = [
         description:"Destacá tu pasión por Argentina con este buzo con capucha adidas. Su tejido de una mezcla de algodón suave te envuelve con comodidad desde el primer momento y los colores llamativos te tendrán en la mirada de todos en la tribuna. Luciendo las 3 estrellas, el escudo tejido de la selección en el pecho deja de manifiesto tus alianzas en la cancha. Al elegir materiales reciclados, podemos dar nueva vida a materiales que ya se han utilizado. La utilización de materiales renovables nos ayuda a reducir nuestra dependencia de los recursos finitos. Nuestros productos hechos con una mezcla de materiales reciclados y renovables incorporan al menos un 70% de estos materiales.",
         price:124.999,
         stock:20,
-        image:"/public/img/Buzo_con_Capucha.jpg",
+        image:"/public/img/Buzo_con_Capucha.jpg",   
         category:"hombre"
     },
 ]
 
-/*
-const promesa = new Promise( (resolve, reject)=> {
-    if(condicion){
-        resolve("se resolvio")
-    }else{
-        reject("se rechazo")
-    }
-})
-*/
-
-
-const getProducts = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(products)
-        }, 2000)
+const seedProducts = () => {
+    const productsRef = collection(db, "products")
+    products.map(( { id, ...dataProduct } )=> {
+        addDoc(productsRef, dataProduct)
     })
+
+    console.log("productos subidos")
+    return
 }
 
-const getProduct = (idProduct) => {
-    return new Promise( (resolve)=> {
-        setTimeout(()=> {
-            const product = products.find( (product)=> product.id === idProduct )
-            resolve(product)
-        }, 2000)
-    })
-}
-
-export { getProducts, getProduct }
+seedProducts()
