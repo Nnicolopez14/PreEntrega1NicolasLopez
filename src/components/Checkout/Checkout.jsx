@@ -30,7 +30,6 @@ const Checkout = () => {
       date: Timestamp.fromDate(new Date()),
       total: totalPrice()
     }
-    //verificamos que el email este correctamente en los 2 campos
     if( dataForm.email === dataForm.repeatEmail ){
       uploadOrder(order)
     }else{
@@ -38,7 +37,7 @@ const Checkout = () => {
     }
   }
 
-  //subimos nuestra orden a firestore
+
   const uploadOrder = (newOrder) => {
     const ordersCollection = collection(db, "orders")
     addDoc(ordersCollection, newOrder)
@@ -46,9 +45,9 @@ const Checkout = () => {
         setOrderId(response.id)
       })
       .finally(()=> {
-        //mandamos una notificacion al usuario
+
         toast.success("Gracias por su compra!!")
-        //actualizamos el stock de cada producto
+
         updateStock()
       })
   }
@@ -59,7 +58,6 @@ const Checkout = () => {
       setDoc(productRef, { ...productCart, stock: productCart.stock - quantity })
     })
 
-    //vaciamos el carrito
     deleteCart()
   }
 
